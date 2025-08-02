@@ -4,3 +4,6 @@ leafmap
 owslib
 streamlit
 openpyxl
+pandas
+sklearn
+GeoJsonTooltip
