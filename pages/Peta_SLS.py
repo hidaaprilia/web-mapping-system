@@ -144,7 +144,7 @@ with col2:
 
     if "replacement_results" in st.session_state and st.session_state.replacement_results:
         df_replace_df = pd.DataFrame(st.session_state.replacement_results)
-        idsls_pengganti_list = df_replace_df["idsls Pengganti"].dropna().unique().tolist()
+        idsls_pengganti_list = df_replace_df["IDSLS Pengganti"].dropna().unique().tolist()
 
         # Filter GeoJSON untuk mendapatkan geometri SLS pengganti
         gdf_pengganti = geojson_data[geojson_data["idsls"].isin(idsls_pengganti_list)]
@@ -223,8 +223,8 @@ with col3:
             for i, idsls in enumerate(idsls_selected):
                 new_idsls = st.selectbox(f"Pengganti untuk {idsls}:", geojson_data["idsls"].unique(), key=f"manual_{i}")
                 idsls_pengganti.append({
-                    "idsls Lama": idsls,
-                    "idsls Pengganti": new_idsls,
+                    "IDSLS Lama": idsls,
+                    "IDSLS Pengganti": new_idsls,
                     "Metode": "Manual",
                     "Keterangan": "Dipilih manual"
                 })
@@ -260,8 +260,8 @@ with col3:
 
                     if bs_X.isnull().values.any() or bs_X.empty:
                         st.session_state.replacement_results.append({
-                            "idsls Lama": idsls,
-                            "idsls Pengganti": "-",
+                            "IDSLS Lama": idsls,
+                            "IDSLS Pengganti": "-",
                             "Metode": "Sistem",
                             "Keterangan": "Data tidak lengkap"
                         })
@@ -276,15 +276,15 @@ with col3:
 
                     if rekomendasi:
                         st.session_state.replacement_results.append({
-                            "idsls Lama": idsls,
-                            "idsls Pengganti": rekomendasi[0],
+                            "IDSLS Lama": idsls,
+                            "IDSLS Pengganti": rekomendasi[0],
                             "Metode": "Sistem",
                             "Keterangan": "Rekomendasi berdasarkan kemiripan"
                         })
                     else:
                         st.session_state.replacement_results.append({
-                            "idsls Lama": idsls,
-                            "idsls Pengganti": "-",
+                            "IDSLS Lama": idsls,
+                            "IDSLS Pengganti": "-",
                             "Metode": "Sistem",
                             "Keterangan": "Tidak ada rekomendasi"
                         })
