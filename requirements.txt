@@ -5,5 +5,4 @@ owslib
 streamlit
 openpyxl
 pandas
-sklearn
-GeoJsonTooltip
+scikit-learn
