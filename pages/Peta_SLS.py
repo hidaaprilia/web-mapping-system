@@ -111,7 +111,7 @@ with col2:
     st.header("Peta SLS")
 
     # Dropdown untuk memilih basemap
-    tooltip_fields = ["idsls", "kdsls", "nmsls", "nmdesa", "nmkec", "luas", "kk", "bstt", "bstt_k", "bsbtt", "muatan", "dom_sls"]
+    tooltip_fields = ["idsls", "kdsls", "nmsls", "nmdesa", "nmkec", "luas"]
     basemap_options = list(leafmap.basemaps.keys())
     basemap = st.selectbox("Pilih Basemap:", basemap_options, index=basemap_options.index("SATELLITE"))
 
