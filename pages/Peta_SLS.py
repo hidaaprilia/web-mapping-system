@@ -1,3 +1,5 @@
+
+
 import streamlit as st
 import geopandas as gpd
 import pandas as pd
@@ -38,7 +40,7 @@ with col1:
     st.markdown("### Filter Tanpa Upload File")
 
     # Input teks untuk cari idsls langsung
-    search_idsls = st.text_input("Cari idsls:")
+    search_idsls = st.text_input("Cari IDSLS:")
 
     # Ambil daftar unik kecamatan dan desa dari geojson_data
     all_kecamatan = geojson_data["nmkec"].dropna().unique().tolist()
@@ -73,7 +75,13 @@ with col1:
         elif uploaded_file.name.endswith(".csv"):
             uploaded_data = pd.read_csv(uploaded_file)
         
+        # Pastikan kolom 'idsls' ada dan dibersihkan dari whitespace dan tanda kutip
         if "idsls" in uploaded_data.columns:
+            uploaded_data["idsls"] = uploaded_data["idsls"].astype(str).str.strip().str.replace("'", "", regex=False)
+
+            # Pastikan geojson juga bersih
+            geojson_data["idsls"] = geojson_data["idsls"].astype(str).str.strip()
+
             # Cocokkan 'idsls' dengan data GeoJSON
             matched_geojson = geojson_data[geojson_data["idsls"].isin(uploaded_data["idsls"])]
             
