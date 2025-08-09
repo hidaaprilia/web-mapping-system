@@ -1,9 +1,10 @@
 import base64
 import streamlit as st
 import importlib.util
+from components.navbar import show_navbar
 
 # Konfigurasi halaman
-st.set_page_config(page_title="Peta Blok Sensus", layout="wide")
+st.set_page_config(page_title="Web Mapping System", layout="wide")
 
 # CSS: Sembunyikan sidebar dan ubah font
 st.markdown("""
@@ -19,13 +20,24 @@ st.markdown("""
         }
             
         div.stButton > button {
-            background-color: white;
+            background-color: none;
             color: black;
             border: none;
-            border-radius: 0px;
-            padding: 6px 14px;
+            border-radius: 1px;
+            padding: 2px 0px; /* lebih kecil */
+            margin-bottom: 0px;
             font-size: 14px;
             font-weight: 500;
+            line-height: 1.2; /* lebih rapat */
+        }
+
+        h5 {
+            margin: 0; /* hilangkan margin bawaan */
+        }
+
+        hr {
+            margin-top: 0px; /* jarak ke atas kecil */
+            margin-bottom: 0px; /* jarak ke bawah kecil */
         }
 
         .explore-button {
@@ -103,10 +115,6 @@ st.markdown("""
 if "page" not in st.session_state:
     st.session_state.page = "Home"
 
-# Navigasi horizontal
-# Navigasi + Logo sejajar
-import streamlit as st
-
 with st.container():
     # Inisialisasi state
     if 'page' not in st.session_state:
@@ -118,7 +126,7 @@ with st.container():
         st.image("images/4.png", width=40)
 
     with nav_title:
-        st.markdown("<h5 style='margin-top: 0px;'>Web Mapping System</h5>", unsafe_allow_html=True)
+        st.markdown("<h5 style='margin:0px;'>Web Mapping System</h5>", unsafe_allow_html=True)
 
     with nav1:
         if st.button("Home"):
@@ -136,9 +144,7 @@ with st.container():
         if st.button("Panduan"):
             st.session_state.page = "Panduan"
 
-
-
-st.markdown("---")
+    st.markdown("---")
 
 # Halaman HOME
 if st.session_state.page == "Home":
@@ -175,40 +181,51 @@ if st.session_state.page == "Home":
 
 
     st.markdown("### ")
+
+    query_params = st.query_params
+    if "page" in query_params:
+        if query_params["page"] == "Peta_BS":
+            st.switch_page("pages/Peta_Blok_Sensus.py")
+        elif query_params["page"] == "Peta_SLS":
+            st.switch_page("pages/Peta_SLS.py") 
+        elif query_params["page"] == "Panduan":
+            st.switch_page("pages/Panduan.py")  
+            
     fitur1, fitur2, fitur3 = st.columns(3)
 
     with fitur1:
-        if st.button(" ", key="btn1"):
-            st.session_state.page = "Peta_Blok_Sensus"
         st.markdown(f"""
-        <div class="fitur-box" style="margin-top: -55px; cursor: pointer;">
-            <img src="data:image/png;base64,{img1}" width="90"/>
-            <div class="fitur-title">Peta Blok Sensus</div>
-            <div class="fitur-desc">Visualisasi blok sensus yang lebih detail</div>
-        </div>
-        """, unsafe_allow_html=True)
-
+            <a href="?page=Peta_BS" style="text-decoration: none; color: inherit;">
+                <div class="fitur-box" style="cursor: pointer;">
+                    <img src="data:image/png;base64,{img1}" width="90"/>
+                    <div class="fitur-title" style="color: black;">Peta Blok Sensus</div>
+                    <div class="fitur-desc">Menampilkan Peta Blok Sensus</div>
+                </div>
+            </a>
+            """, unsafe_allow_html=True)
+        
     with fitur2:
-        if st.button(" ", key="btn2"):
-            st.session_state.page = "Peta_SLS"
         st.markdown(f"""
-        <div class="fitur-box" style="margin-top: -55px; cursor: pointer;">
-            <img src="data:image/png;base64,{img2}" width="90"/>
-            <div class="fitur-title">Peta SLS</div>
-            <div class="fitur-desc">Menampilkan Satuan Lingkungan Setempat</div>
-        </div>
-        """, unsafe_allow_html=True)
+            <a href="?page=Peta_SLS" style="text-decoration: none; color: inherit;">
+                <div class="fitur-box" style="cursor: pointer;">
+                    <img src="data:image/png;base64,{img2}" width="90"/>
+                    <div class="fitur-title" style="color: black;">Peta SLS</div>
+                    <div class="fitur-desc">Menampilkan Peta Satuan Lingkungan Setempat</div>
+                </div>
+            </a>
+            """, unsafe_allow_html=True)
+        
 
     with fitur3:
-        if st.button(" ", key="btn3"):
-            st.session_state.page = "Panduan"
         st.markdown(f"""
-        <div class="fitur-box" style="margin-top: -55px; cursor: pointer;">
-            <img src="data:image/png;base64,{img3}" width="90"/>
-            <div class="fitur-title">Panduan</div>
-            <div class="fitur-desc">Petunjuk dan navigasi penggunaan aplikasi</div>
-        </div>
-        """, unsafe_allow_html=True)
+            <a href="?page=Panduan" style="text-decoration: none; color: inherit;">
+                <div class="fitur-box" style="cursor: pointer;">
+                    <img src="data:image/png;base64,{img3}" width="90"/>
+                    <div class="fitur-title" style="color: black;">Panduan</div>
+                    <div class="fitur-desc">Petunjuk dan Panduan Penggunaan</div>
+                </div>
+            </a>
+            """, unsafe_allow_html=True)
 
 # Fungsi untuk load file Python dari folder /pages
 def load_page(page_name):
