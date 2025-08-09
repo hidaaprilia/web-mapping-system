@@ -1,7 +1,6 @@
 import base64
 import streamlit as st
 import importlib.util
-from components.navbar import show_navbar
 
 # Konfigurasi halaman
 st.set_page_config(page_title="Web Mapping System", layout="wide")
