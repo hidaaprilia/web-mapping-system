@@ -1,9 +1,22 @@
+
+
 import base64
 import streamlit as st
 import importlib.util
 
 # Konfigurasi halaman
 st.set_page_config(page_title="Web Mapping System", layout="wide")
+
+query_params = st.query_params
+if "page" in query_params:
+    if query_params["page"] == "Home":
+        st.session_state.page = "Home"
+    elif query_params["page"] == "Peta_BS":
+        st.session_state.page = "Peta_Blok_Sensus"
+    elif query_params["page"] == "Peta_SLS":
+        st.session_state.page = "Peta_SLS"
+    elif query_params["page"] == "Panduan":
+        st.session_state.page = "Panduan"  
 
 # CSS: Sembunyikan sidebar dan ubah font
 st.markdown("""
@@ -181,14 +194,7 @@ if st.session_state.page == "Home":
 
     st.markdown("### ")
 
-    query_params = st.query_params
-    if "page" in query_params:
-        if query_params["page"] == "Peta_BS":
-            st.switch_page("pages/Peta_Blok_Sensus.py")
-        elif query_params["page"] == "Peta_SLS":
-            st.switch_page("pages/Peta_SLS.py") 
-        elif query_params["page"] == "Panduan":
-            st.switch_page("pages/Panduan.py")  
+
             
     fitur1, fitur2, fitur3 = st.columns(3)
 
