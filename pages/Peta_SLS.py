@@ -44,51 +44,51 @@ from folium.features import GeoJsonTooltip
 #     </style>
 # """, unsafe_allow_html=True)
 
-# Inisialisasi state halaman
-if "page" not in st.session_state:
-    st.session_state.page = "Peta_SLS"
+# # Inisialisasi state halaman
+# if "page" not in st.session_state:
+#     st.session_state.page = "Peta_SLS"
 
-with st.container():
-    # Inisialisasi state
-    if 'page' not in st.session_state:
-        st.session_state.page = "Home"
+# with st.container():
+#     # Inisialisasi state
+#     if 'page' not in st.session_state:
+#         st.session_state.page = "Home"
         
-    logo, nav_title, nav1, nav2, nav3, nav4 = st.columns([0.3, 3.7, 1, 1.4, 1, 1])
+#     logo, nav_title, nav1, nav2, nav3, nav4 = st.columns([0.3, 3.7, 1, 1.4, 1, 1])
 
-    with logo:
-        st.image("images/4.png", width=40)
+#     with logo:
+#         st.image("images/4.png", width=40)
 
-    with nav_title:
-        st.markdown("<h5 style='margin:0px;'>Web Mapping System</h5>", unsafe_allow_html=True)
+#     with nav_title:
+#         st.markdown("<h5 style='margin:0px;'>Web Mapping System</h5>", unsafe_allow_html=True)
 
-    with nav1:
-        if st.button("Home"):
-            st.session_state.page = "Home"
+#     with nav1:
+#         if st.button("Home"):
+#             st.session_state.page = "Home"
 
-    with nav2:
-        if st.button("Peta Blok Sensus"):
-            st.session_state.page = "Peta_Blok_Sensus"
+#     with nav2:
+#         if st.button("Peta Blok Sensus"):
+#             st.session_state.page = "Peta_Blok_Sensus"
 
-    with nav3:
-        if st.button("Peta SLS"):
-            st.session_state.page = "Peta_SLS"
+#     with nav3:
+#         if st.button("Peta SLS"):
+#             st.session_state.page = "Peta_SLS"
 
-    with nav4:
-        if st.button("Panduan"):
-            st.session_state.page = "Panduan"
+#     with nav4:
+#         if st.button("Panduan"):
+#             st.session_state.page = "Panduan"
 
-    st.markdown("---")
+#     st.markdown("---")
 
-# Fungsi untuk load file Python dari folder /pages
-def load_page(page_name):
-    file_path = f"pages/{page_name}.py"
-    spec = importlib.util.spec_from_file_location("page", file_path)
-    page = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(page)
+# # Fungsi untuk load file Python dari folder /pages
+# def load_page(page_name):
+#     file_path = f"pages/{page_name}.py"
+#     spec = importlib.util.spec_from_file_location("page", file_path)
+#     page = importlib.util.module_from_spec(spec)
+#     spec.loader.exec_module(page)
 
-# Load halaman sesuai pilihan
-if st.session_state.page in ["Peta_Blok_Sensus", "Peta_SLS", "Panduan"]:
-    load_page(st.session_state.page)
+# # Load halaman sesuai pilihan
+# if st.session_state.page in ["Peta_Blok_Sensus", "Peta_SLS", "Panduan"]:
+#     load_page(st.session_state.page)
 
 # Path ke file GeoJSON
 geojson_path = "data/gabungan_output_sls.geojson"
