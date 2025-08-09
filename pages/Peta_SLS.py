@@ -5,44 +5,44 @@ import geopandas as gpd
 import pandas as pd
 import leafmap.foliumap as leafmap
 from folium.features import GeoJsonTooltip
-import importlib.util
+# import importlib.util
 
-st.set_page_config(layout="wide")
+# st.set_page_config(layout="wide")
 
-st.markdown("""
-    <style>
-        [data-testid="stSidebar"] {
-            display: none;
-        }
+# st.markdown("""
+#     <style>
+#         [data-testid="stSidebar"] {
+#             display: none;
+#         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+#         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-        html, body, [class*="css"] {
-            font-family: 'Inter', sans-serif;
-        }
+#         html, body, [class*="css"] {
+#             font-family: 'Inter', sans-serif;
+#         }
             
-        div.stButton > button {
-            background-color: none;
-            color: black;
-            border: none;
-            border-radius: 1px;
-            padding: 2px 0px; /* lebih kecil */
-            margin-bottom: 0px;
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 1.2; /* lebih rapat */
-        }
+#         div.stButton > button {
+#             background-color: none;
+#             color: black;
+#             border: none;
+#             border-radius: 1px;
+#             padding: 2px 0px; /* lebih kecil */
+#             margin-bottom: 0px;
+#             font-size: 14px;
+#             font-weight: 500;
+#             line-height: 1.2; /* lebih rapat */
+#         }
 
-        h5 {
-            margin: 0; /* hilangkan margin bawaan */
-        }
+#         h5 {
+#             margin: 0; /* hilangkan margin bawaan */
+#         }
 
-        hr {
-            margin-top: 0px; /* jarak ke atas kecil */
-            margin-bottom: 0px; /* jarak ke bawah kecil */
-        }
-    </style>
-""", unsafe_allow_html=True)
+#         hr {
+#             margin-top: 0px; /* jarak ke atas kecil */
+#             margin-bottom: 0px; /* jarak ke bawah kecil */
+#         }
+#     </style>
+# """, unsafe_allow_html=True)
 
 # Inisialisasi state halaman
 if "page" not in st.session_state:
