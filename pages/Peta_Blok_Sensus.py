@@ -162,9 +162,13 @@ with col2:
     st.markdown(
         """
         <style>
-        [data-testid="stHorizontalBlock"] > div:first-child {flex: 1;}
-        [data-testid="stHorizontalBlock"] > div:nth-child(2) {flex: 4;}
-        [data-testid="stHorizontalBlock"] > div:nth-child(3) {flex: 1;}
+        /* Atur flex kolom langsung berdasarkan class */
+        .stColumn:first-child {flex: 1 !important; max-width: 20%;}
+        .stColumn:nth-child(2) {flex: 4 !important; max-width: 60%;}
+        .stColumn:nth-child(3) {flex: 1 !important; max-width: 20%;}
+
+        /* Hilangkan padding horizontal container utama biar peta lebar */
+        section.main > div {padding-left: 0rem; padding-right: 0rem;}
         </style>
         """,
         unsafe_allow_html=True
