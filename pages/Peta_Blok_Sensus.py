@@ -156,7 +156,9 @@ with col2:
             )
     
     m.add_basemap(basemap)
-    m.to_streamlit(height=600, use_container_width=True)
+    col_map = st.container()
+    with col_map:
+        m.to_streamlit(height=600)
 
 # Kolom kanan (Detail Data)
 with col3:

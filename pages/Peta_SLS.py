@@ -19,7 +19,7 @@ except Exception as e:
     st.error(f"Error saat membaca GeoJSON: {e}")
 
 # Layout untuk tiga bagian: kiri, tengah, kanan
-col1, col2, col3 = st.columns([1, 3, 1])
+col1, col2, col3 = st.columns([1, 2, 1])
 
 # Variabel global untuk nama kecamatan dan nama desa yang dipilih, variabel pengganti bs
 selected_nmkec = []
@@ -167,7 +167,7 @@ with col2:
             )
     
     m.add_basemap(basemap)
-    m.to_streamlit(height=600, use_container_width=True)
+    m.to_streamlit(height=600, width="100%")
 
 # Kolom kanan (Detail Data)
 with col3:
