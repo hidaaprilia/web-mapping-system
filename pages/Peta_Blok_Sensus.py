@@ -156,21 +156,23 @@ with col2:
                 style={"color": "red", "fillColor": "red", "fillOpacity": 0.5},
                 info_mode="on_hover",
             )
-        st.markdown(
+    st.markdown(
         """
         <style>
-        /* Atur flex kolom langsung berdasarkan class */
-        .stColumn:first-child {flex: 1 !important; max-width: 20%;}
-        .stColumn:nth-child(2) {flex: 4 !important; max-width: 60%;}
-        .stColumn:nth-child(3) {flex: 1 !important; max-width: 20%;}
-
-        /* Hilangkan padding horizontal container utama biar peta lebar */
-        section.main > div {padding-left: 0rem; padding-right: 0rem;}
+        /* Hilangkan batas lebar default */
+        .block-container {
+            max-width: 100% !important;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        /* Atur ulang proporsi kolom */
+        [data-testid="stHorizontalBlock"] > div:first-child {flex: 1;}
+        [data-testid="stHorizontalBlock"] > div:nth-child(2) {flex: 6;}
+        [data-testid="stHorizontalBlock"] > div:nth-child(3) {flex: 1;}
         </style>
         """,
         unsafe_allow_html=True
-    )
-        
+    )       
     m.add_basemap(basemap)
     m.to_streamlit(height=600, use_container_width=True)
 
