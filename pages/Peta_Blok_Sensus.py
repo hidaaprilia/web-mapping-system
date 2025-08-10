@@ -156,23 +156,7 @@ with col2:
                 style={"color": "red", "fillColor": "red", "fillOpacity": 0.5},
                 info_mode="on_hover",
             )
-    st.markdown(
-        """
-        <style>
-        /* Hilangkan batas lebar default */
-        .block-container {
-            max-width: 100% !important;
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-        /* Atur ulang proporsi kolom */
-        [data-testid="stHorizontalBlock"] > div:first-child {flex: 1;}
-        [data-testid="stHorizontalBlock"] > div:nth-child(2) {flex: 6;}
-        [data-testid="stHorizontalBlock"] > div:nth-child(3) {flex: 1;}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )       
+   
     m.add_basemap(basemap)
     m.to_streamlit(height=600, use_container_width=True)
 
