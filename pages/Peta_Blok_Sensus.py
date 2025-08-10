@@ -8,6 +8,27 @@ from folium.features import GeoJsonTooltip
 
 st.set_page_config(layout="wide")
 
+st.markdown(
+    """
+    <style>
+    .block-container {
+        padding-top: 1rem;
+        padding-bottom: 0rem;
+    }
+    [data-testid="stHorizontalBlock"] {
+        gap: 0rem !important;
+    }
+    [data-testid="stHorizontalBlock"] > div {
+        flex: 1 1 0 !important;
+    }
+    [data-testid="stHorizontalBlock"] > div:nth-child(2) {
+        flex: 5 1 0 !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Path ke file GeoJSON
 geojson_path = "data/gabungan_output_bs.geojson"
 
