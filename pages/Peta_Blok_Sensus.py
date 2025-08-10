@@ -156,10 +156,7 @@ with col2:
                 style={"color": "red", "fillColor": "red", "fillOpacity": 0.5},
                 info_mode="on_hover",
             )
-    
-    m.add_basemap(basemap)
-    m.to_streamlit(height=600, use_container_width=True)
-    st.markdown(
+        st.markdown(
         """
         <style>
         /* Atur flex kolom langsung berdasarkan class */
@@ -173,6 +170,9 @@ with col2:
         """,
         unsafe_allow_html=True
     )
+        
+    m.add_basemap(basemap)
+    m.to_streamlit(height=600, use_container_width=True)
 
 # Kolom kanan (Detail Data)
 with col3:
