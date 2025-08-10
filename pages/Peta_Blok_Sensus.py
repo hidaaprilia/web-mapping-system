@@ -1,3 +1,5 @@
+
+
 import streamlit as st
 import geopandas as gpd
 import pandas as pd
@@ -156,9 +158,17 @@ with col2:
             )
     
     m.add_basemap(basemap)
-    col_map = st.container()
-    with col_map:
-        m.to_streamlit(height=600)
+    m.to_streamlit(height=600, use_container_width=True)
+    st.markdown(
+        """
+        <style>
+        [data-testid="stHorizontalBlock"] > div:first-child {flex: 1;}
+        [data-testid="stHorizontalBlock"] > div:nth-child(2) {flex: 4;}
+        [data-testid="stHorizontalBlock"] > div:nth-child(3) {flex: 1;}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
 # Kolom kanan (Detail Data)
 with col3:
