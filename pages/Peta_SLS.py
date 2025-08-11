@@ -7,6 +7,18 @@ import leafmap.foliumap as leafmap
 from folium.features import GeoJsonTooltip
 
 st.set_page_config(layout="wide")
+st.markdown(
+    """
+    <style>
+    /* Target semua peta leaflet */
+    .leaflet-container {
+        height: 800px !important; /* ubah tinggi */
+        width: 100% !important;   /* lebarkan penuh */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Path ke file GeoJSON
 geojson_path = "data/gabungan_output_sls.geojson"
