@@ -21,7 +21,7 @@ st.markdown(
 )
 
 # Path ke file GeoJSON
-geojson_path = "data/gabungan_output_sls.geojson"
+geojson_path = "data/peta_sls_202511507.geojson"
 
 # Baca file GeoJSON
 try:
@@ -131,7 +131,7 @@ with col2:
     st.header("Peta SLS")
 
     # Dropdown untuk memilih basemap
-    tooltip_fields = ["idsls", "kdsls", "nmsls", "nmdesa", "nmkec", "luas"]
+    tooltip_fields = ["idsls", "kdsls", "idsubsls", "kdsubsls", "nmsls", "nmdesa", "nmkec"]
     basemap_options = list(leafmap.basemaps.keys())
     basemap = st.selectbox("Pilih Basemap:", basemap_options, index=basemap_options.index("SATELLITE"))
 
@@ -255,7 +255,7 @@ with col3:
             st.session_state.replacement_results = []
 
             try:
-                feature_cols = ["kdkec", "kddesa", "luas"]  # Kolom numerik, sesuaikan
+                feature_cols = ["kdkec", "kddesa"]  # Kolom numerik, sesuaikan
 
                 # Filter & bersihkan data
                 all_bs = geojson_data.dropna(subset=["idsls"]).copy()

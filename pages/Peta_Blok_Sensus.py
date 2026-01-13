@@ -21,7 +21,7 @@ st.markdown(
 )
 
 # Path ke file GeoJSON
-geojson_path = "data/gabungan_output_bs.geojson"
+geojson_path = "data/peta_bs_202511507.geojson"
 
 # Baca file GeoJSON
 try:
