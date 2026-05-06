@@ -1,0 +1,5 @@
+venv310/
+webmapenv/
+__pycache__/
+*.pyc
+.DS_Store
