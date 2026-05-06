@@ -277,7 +277,7 @@ with col3:
             st.dataframe(geojson_data.drop(columns="geometry"))
     
     with tab2:
-        st.subheader("List BS")
+        st.subheader("List SLS")
         if search_idsls:
             st.write(filtered_geojson["idsls"].tolist())
         elif selected_nmdesa:
