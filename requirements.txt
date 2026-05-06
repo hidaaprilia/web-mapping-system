@@ -9,6 +9,7 @@ shapely==2.0.2
 pyproj==3.6.1
 fiona==1.9.5
 
-leafmap==0.30.0
+folium==0.15.1
+streamlit-folium==0.17.0
 owslib==0.29.3
 setuptools>=65.5.0

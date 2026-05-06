@@ -1,7 +1,7 @@
 import streamlit as st
 import geopandas as gpd
 import pandas as pd
-import leafmap
+import leafmap.foliumap as leafmap
 import random
 import folium
 from folium.features import GeoJsonTooltip
@@ -148,7 +148,7 @@ with col2:
 
     # Dropdown untuk memilih basemap
     tooltip_fields = ["idsls", "kdsls", "idsubsls", "kdsubsls", "nmsls", "nmdesa", "nmkec"]
-    basemap_options = ["OpenStreetMap", "SATELLITE", "TERRAIN"]
+    basemap_options = list(leafmap.basemaps.keys())
     basemap = st.selectbox("Pilih Basemap:", basemap_options, index=basemap_options.index("SATELLITE"))
 
     # Inisialisasi peta

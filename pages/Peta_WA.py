@@ -1,9 +1,16 @@
 import streamlit as st
 import geopandas as gpd
 import pandas as pd
-import leafmap.foliumap as leafmap
 import folium
 from folium.features import GeoJsonTooltip
+
+# Import leafmap dengan error handling untuk Streamlit Cloud
+try:
+    import leafmap.foliumap as leafmap
+except Exception as e:
+    st.error(f"Gagal memuat leafmap: {e}")
+    st.info("Sedang mencoba memuat ulang...")
+    import leafmap.foliumap as leafmap
 
 st.title("Peta SLS Kabupaten Tanjung Jabung Barat")
 st.markdown(

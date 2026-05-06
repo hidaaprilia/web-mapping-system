@@ -1,19 +1,22 @@
 
-
 import streamlit as st
 import geopandas as gpd
 import pandas as pd
+import folium
 from folium.features import GeoJsonTooltip
-
-# Import leafmap dengan error handling untuk Streamlit Cloud
-try:
-    import leafmap.foliumap as leafmap
-except Exception as e:
-    st.error(f"Gagal memuat leafmap: {e}")
-    st.info("Sedang mencoba memuat ulang...")
-    import leafmap.foliumap as leafmap
+from streamlit_folium import st_folium
 
 st.set_page_config(layout="wide")
+
+# Define available basemaps for folium
+BASEMAPS = {
+    "OpenStreetMap": folium.TileLayer("OpenStreetMap"),
+    "Satellite": folium.TileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", attr="Esri", name="Satellite"),
+    "Terrain": folium.TileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}", attr="Esri", name="Terrain"),
+    "CartoDB Positron": folium.TileLayer("CartoDB positron"),
+    "CartoDB Voyager": folium.TileLayer("CartoDB voyager"),
+}
+
 st.markdown(
     """
     <style>
@@ -130,13 +133,8 @@ with col2:
 
     # Dropdown untuk memilih basemap
     tooltip_fields = ["idbs", "kdbs", "nmsls", "nmdesa", "nmkec", "luas", "kk", "bstt", "bstt_k", "bsbtt", "muatan", "dom_sls", "dominan"]
-    basemap_options = list(leafmap.basemaps.keys())
-    basemap = st.selectbox("Pilih Basemap:", basemap_options, index=basemap_options.index("SATELLITE"))
-
-    # Inisialisasi peta
-    m = leafmap.Map(
-        locate_control=True, latlon_control=True, draw_export=True, minimap_control=True
-    )
+    basemap_options = list(BASEMAPS.keys())
+    basemap_name = st.selectbox("Pilih Basemap:", basemap_options, index=1)
 
     if search_idbs:
         data_to_display = filtered_geojson
@@ -149,16 +147,29 @@ with col2:
     else:
         data_to_display = geojson_data   
 
+    # Inisialisasi peta dengan folium
+    center_lat = data_to_display.geometry.centroid.y.mean()
+    center_lon = data_to_display.geometry.centroid.x.mean()
+    
+    m = folium.Map(
+        location=[center_lat, center_lon],
+        zoom_start=11,
+        tiles=None
+    )
+    
+    # Add selected basemap
+    BASEMAPS[basemap_name].add_to(m)
+
     # Filter GeoDataFrame untuk tooltip
-    columns_to_keep = tooltip_fields + ["geometry"]
+    columns_to_keep = [col for col in tooltip_fields if col in data_to_display.columns] + ["geometry"]
     gdf_for_map = data_to_display[columns_to_keep]
 
-    # Tambahkan ke peta dengan tooltip sebagai bagian dari style
-    m.add_gdf(
-        gdf_for_map,
-        layer_name="Blok Sensus Terfilter",
-        info_mode="on_hover",  # Sudah cukup untuk hover info default
-    )
+    # Tambahkan GeoJSON ke peta
+    folium.GeoJson(
+        data=gdf_for_map.__geo_interface__,
+        name="Blok Sensus Terfilter",
+        tooltip=folium.GeoJsonTooltip(fields=[col for col in tooltip_fields if col in data_to_display.columns], labels=[col for col in tooltip_fields if col in data_to_display.columns])
+    ).add_to(m)
 
     if "replacement_results" in st.session_state and st.session_state.replacement_results:
         df_replace_df = pd.DataFrame(st.session_state.replacement_results)
@@ -166,18 +177,16 @@ with col2:
 
         # Filter GeoJSON untuk mendapatkan geometri BS pengganti
         gdf_pengganti = geojson_data[geojson_data["idbs"].isin(idbs_pengganti_list)]
-        gdf_for_map = gdf_pengganti[columns_to_keep]
 
         if not gdf_pengganti.empty:
-            m.add_gdf(
-                gdf_for_map,
-                layer_name="BS Pengganti",
-                style={"color": "red", "fillColor": "red", "fillOpacity": 0.5},
-                info_mode="on_hover",
-            )
+            folium.GeoJson(
+                data=gdf_pengganti.__geo_interface__,
+                name="BS Pengganti",
+                style_function=lambda x: {"color": "red", "fillColor": "red", "fillOpacity": 0.5}
+            ).add_to(m)
    
-    m.add_basemap(basemap)
-    m.to_streamlit(width=900, height=600, use_container_width=True)
+    folium.LayerControl().add_to(m)
+    st_folium(m, width=700, height=600)
 
 # Kolom kanan (Detail Data)
 with col3:
