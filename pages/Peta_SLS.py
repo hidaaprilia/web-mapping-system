@@ -1,7 +1,6 @@
 import streamlit as st
 import geopandas as gpd
 import pandas as pd
-import leafmap.foliumap as leafmap
 import random
 import folium
 from folium.features import GeoJsonTooltip
