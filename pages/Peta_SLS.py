@@ -148,7 +148,7 @@ with col2:
 
     # Dropdown untuk memilih basemap
     tooltip_fields = ["idsls", "kdsls", "idsubsls", "kdsubsls", "nmsls", "nmdesa", "nmkec"]
-    basemap_options = list(leafmap.basemaps.keys())
+    basemap_options = ["OpenStreetMap", "SATELLITE", "TERRAIN"]
     basemap = st.selectbox("Pilih Basemap:", basemap_options, index=basemap_options.index("SATELLITE"))
 
     # Inisialisasi peta
