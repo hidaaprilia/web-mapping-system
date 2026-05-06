@@ -1,4 +1,8 @@
 --find-links=https://girder.github.io/large_image_wheels GDAL
+
+setuptools==69.5.1
+wheel
+
 streamlit==1.31.0
 pandas==2.1.4
 openpyxl==3.1.2
@@ -11,6 +15,6 @@ fiona==1.9.5
 
 folium==0.15.1
 streamlit-folium==0.17.0
-leafmap==0.31.8
+leafmap==0.30.0
+
 owslib==0.29.3
-setuptools>=65.5.0
